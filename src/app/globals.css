@@ -192,7 +192,7 @@ body {
 /* The visible open parchment between the rollers. */
 .sefer-window {
   position: relative;
-  height: min(76vh, 760px);
+  height: min(84vh, 900px);
   flex: 1 1 auto;
   margin: 0 clamp(120px, 15vw, 230px);
   overflow: hidden;
@@ -247,7 +247,7 @@ body {
   column-fill: auto;
   direction: rtl;
   text-align: justify;
-  font-size: clamp(0.95rem, 1.45vw, 1.45rem);
+  font-size: calc(clamp(0.95rem, 1.45vw, 1.45rem) * var(--sz, 1));
   line-height: 1.62em;
   color: #1b1206;
 }
@@ -387,6 +387,114 @@ body {
   font-weight: 600;
   color: #f0e2c0;
   backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+.sefer-hint-touch {
+  display: none;
+}
+
+/* Zoom controls. */
+.sefer-zoom {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: 9999px;
+  background: rgba(26, 16, 6, 0.62);
+  padding: 4px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+.sefer-zoom button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: #f0e2c0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+.sefer-zoom button:hover:not(:disabled) {
+  background: rgba(240, 226, 192, 0.18);
+}
+.sefer-zoom button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.sefer-zoom-reset {
+  min-width: 50px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+/* ---- Mobile / small screens ---- */
+@media (max-width: 640px) {
+  .sefer-window {
+    height: min(66vh, 540px);
+    margin: 0 56px;
+  }
+  .sefer-stage--real .sefer-window {
+    height: min(66vh, 540px);
+  }
+  .sefer-stage--real .sefer-roller {
+    height: min(70vh, 580px);
+  }
+  .sefer-roller {
+    width: 26px;
+  }
+  .sefer-roller.left {
+    left: 6px;
+  }
+  .sefer-roller.right {
+    right: 6px;
+  }
+  .sefer-pole {
+    width: 16px;
+  }
+  .sefer-cap,
+  .sefer-stage--real .sefer-cap {
+    width: 42px;
+    height: 14px;
+  }
+  .sefer-finial-svg {
+    width: 30px;
+    height: 50px;
+  }
+  .sefer-strip {
+    padding: 1.1rem 0.6rem;
+  }
+  .sefer-columns {
+    column-width: clamp(120px, 56vw, 190px);
+    column-gap: 22px;
+  }
+  .sefer-hint-desktop {
+    display: none;
+  }
+  .sefer-hint-touch {
+    display: inline;
+  }
+  .sefer-hint {
+    bottom: 10px;
+    left: 14px;
+    transform: none;
+    font-size: 11px;
+    padding: 5px 11px;
+  }
+  .sefer-zoom {
+    right: 10px;
+    bottom: 8px;
+  }
 }
 
 /* ===================================================================
@@ -401,17 +509,17 @@ body {
     radial-gradient(135% 105% at 50% 16%, #ffffff 0%, #f4efe6 46%, #e4ded0 78%, #d3ccbc 100%);
 }
 
-/* Shorter rollers so the wooden caps and turned finials fit on screen,
-   the way the whole sefer sits in the reference photographs. */
+/* Tall rollers that nearly fill the stage, with just enough room above
+   and below for the wooden caps and turned finials to read. */
 .sefer-stage--real .sefer-roller {
-  height: min(62vh, 600px);
+  height: min(74vh, 800px);
 }
 .sefer-stage--real .sefer-bundle {
-  top: 3%;
-  bottom: 3%;
+  top: 2%;
+  bottom: 2%;
 }
 .sefer-stage--real .sefer-window {
-  height: min(60vh, 580px);
+  height: min(72vh, 780px);
 }
 
 /* The open klaf — cleaner, lighter, with faint sirtut ruling lines. */
@@ -511,8 +619,8 @@ body {
 .sefer-finial-svg {
   position: absolute;
   left: 50%;
-  width: clamp(40px, 4.4vw, 60px);
-  height: clamp(74px, 8.5vw, 122px);
+  width: clamp(38px, 4.2vw, 56px);
+  height: clamp(46px, 4.8vw, 78px);
   z-index: 13;
   filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.4));
 }

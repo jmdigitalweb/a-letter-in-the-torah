@@ -155,13 +155,14 @@ export function TorahExperience({
 
   return (
     <div className={`${seferReal ? "sefer-bg-real" : sefer ? "sefer-bg" : photo ? "parchment-photo" : realistic ? "parchment-real" : "parchment"} flex h-screen flex-col`}>
-      <header className="z-30 flex items-center gap-4 border-b border-amber-900/25 bg-[#d8c089]/80 px-4 py-3 backdrop-blur sm:px-6">
-        <div className="mr-auto">
-          <h1 className="text-lg font-bold leading-none text-amber-950 sm:text-xl">
+      <header className="z-30 flex items-center gap-2 border-b border-amber-900/25 bg-[#d8c089]/80 px-3 py-3 backdrop-blur sm:gap-4 sm:px-6">
+        <div className="mr-auto min-w-0">
+          <h1 className="truncate text-base font-bold leading-none text-amber-950 sm:text-xl">
             A Letter in the Torah
           </h1>
-          <p className="text-xs text-amber-900/70">
-            Hover any letter • {parsha.letterCount.toLocaleString()} letters in this portion
+          <p className="truncate text-[11px] text-amber-900/70 sm:text-xs">
+            <span className="hidden sm:inline">Hover</span>
+            <span className="sm:hidden">Tap</span> any letter • {parsha.letterCount.toLocaleString()} letters
           </p>
         </div>
 
@@ -198,12 +199,12 @@ export function TorahExperience({
           </Link>
         </div>
 
-        <label className="flex items-center gap-2 text-sm">
+        <label className="flex shrink items-center gap-2 text-sm">
           <span className="hidden text-amber-900/80 sm:inline">Portion</span>
           <select
             value={parshaId}
             onChange={(e) => setParshaId(e.target.value)}
-            className="rounded-lg border border-amber-900/30 bg-[#fbf3dc] px-3 py-2 text-sm font-semibold text-amber-950 shadow-sm outline-none"
+            className="max-w-[34vw] truncate rounded-lg border border-amber-900/30 bg-[#fbf3dc] px-2 py-2 text-xs font-semibold text-amber-950 shadow-sm outline-none sm:max-w-none sm:px-3 sm:text-sm"
           >
             {parshiyot.map((p) => (
               <option key={p.id} value={p.id}>
@@ -215,7 +216,7 @@ export function TorahExperience({
 
         <button
           onClick={() => setCartOpen(true)}
-          className="relative rounded-lg bg-amber-800 px-4 py-2 text-sm font-semibold text-amber-50 shadow hover:bg-amber-900"
+          className="relative shrink-0 rounded-lg bg-amber-800 px-3 py-2 text-sm font-semibold text-amber-50 shadow hover:bg-amber-900 sm:px-4"
         >
           Cart
           {cart.length > 0 && (
