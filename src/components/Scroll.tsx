@@ -3,7 +3,7 @@
 import { memo } from "react";
 import { Parsha, isSpace, letterInfo } from "@/lib/torah";
 
-export type Variant = "classic" | "realistic" | "photo" | "sefer";
+export type Variant = "classic" | "realistic" | "photo" | "sefer" | "sefer-real";
 
 type Props = {
   parsha: Parsha;
@@ -40,7 +40,7 @@ function ScrollImpl({ parsha, firstLetterId, cartIds, variant }: Props) {
   });
 
   const cls =
-    variant === "sefer"
+    variant === "sefer" || variant === "sefer-real"
       ? "stam-shlomo sefer-columns select-none"
       : variant === "photo"
         ? "stam-shlomo select-none"

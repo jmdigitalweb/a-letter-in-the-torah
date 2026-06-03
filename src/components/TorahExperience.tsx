@@ -17,7 +17,8 @@ export function TorahExperience({
 }) {
   const realistic = variant === "realistic";
   const photo = variant === "photo";
-  const sefer = variant === "sefer";
+  const seferReal = variant === "sefer-real";
+  const sefer = variant === "sefer" || seferReal;
   const [parshaId, setParshaId] = useState(parshiyot[0].id);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
@@ -153,7 +154,7 @@ export function TorahExperience({
   const total = cart.reduce((s, i) => s + i.price, 0);
 
   return (
-    <div className={`${sefer ? "sefer-bg" : photo ? "parchment-photo" : realistic ? "parchment-real" : "parchment"} flex h-screen flex-col`}>
+    <div className={`${seferReal ? "sefer-bg-real" : sefer ? "sefer-bg" : photo ? "parchment-photo" : realistic ? "parchment-real" : "parchment"} flex h-screen flex-col`}>
       <header className="z-30 flex items-center gap-4 border-b border-amber-900/25 bg-[#d8c089]/80 px-4 py-3 backdrop-blur sm:px-6">
         <div className="mr-auto">
           <h1 className="text-lg font-bold leading-none text-amber-950 sm:text-xl">
@@ -185,9 +186,15 @@ export function TorahExperience({
           </Link>
           <Link
             href="/"
-            className={`border-l border-amber-900/30 px-3 py-2 ${sefer ? "bg-amber-800 text-amber-50" : "bg-[#fbf3dc] text-amber-900 hover:bg-amber-100"}`}
+            className={`border-l border-amber-900/30 px-3 py-2 ${variant === "sefer" ? "bg-amber-800 text-amber-50" : "bg-[#fbf3dc] text-amber-900 hover:bg-amber-100"}`}
           >
             Sefer
+          </Link>
+          <Link
+            href="/v4"
+            className={`border-l border-amber-900/30 px-3 py-2 ${seferReal ? "bg-amber-800 text-amber-50" : "bg-[#fbf3dc] text-amber-900 hover:bg-amber-100"}`}
+          >
+            Sefer HD
           </Link>
         </div>
 
@@ -229,6 +236,7 @@ export function TorahExperience({
             onOut={onOut}
             onClick={onClick}
             onScroll={close}
+            real={seferReal}
           />
           {cart.length > 0 && (
             <div className="pointer-events-none absolute bottom-4 right-4 z-20">
